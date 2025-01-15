@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Model AR Viewer</title>
+    <!-- Import model-viewer library -->
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        model-viewer {
+            width: 100%;
+            height: 500px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Wooden Storage Crate AR Viewer</h1>
+
+    <!-- model-viewer component to load the GLB model -->
+    <model-viewer id="model-viewer" 
+                  ar 
+                  ar-modes="scene-viewer quick-look" 
+                  environment-image="neutral" 
+                  auto-rotate 
+                  camera-controls 
+                  src="Wooden_Storage_Crate_0113133156.glb">
+    </model-viewer>
+
+    <!-- AR button for mobile devices -->
+    <button id="enter-ar" style="display:none;">Enter AR</button>
+
+    <script>
+        const modelViewer = document.getElementById('model-viewer');
+        const arButton = document.getElementById('enter-ar');
+
+        // Check if AR is available on the device and show the button
+        if (modelViewer.hasAttribute('ar')) {
+            arButton.style.display = 'block'; // Show the button if AR is supported
+        }
+
+        // Add event listener to the AR button
+        arButton.addEventListener('click', () => {
+            modelViewer.enterAR();
+        });
+    </script>
+
+</body>
+</html>
